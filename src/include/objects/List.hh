@@ -37,10 +37,14 @@ namespace Mt {
 		};
 
 		template <class T>
-		List<T>::List(){}
+		List<T>::List() {
+			this->DerivedType = Mt::core::TYPE::LIST;
+		}
 
 		template <class T>
-		List<T>::List(std::initializer_list<T>) {}
+		List<T>::List(std::initializer_list<T>) {
+			this->DerivedType = Mt::core::TYPE::LIST;
+		}
 
 		template <class T>
 		void List<T>::Add(T value) {
