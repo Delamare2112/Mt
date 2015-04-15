@@ -50,22 +50,22 @@
 %%
 
 %{
-    // reset location
-    yylloc->step();
+	// reset location
+	yylloc->step();
 %}
 
 [ \t\r]+				{ yylloc->step(); }
 \n 						{ yylloc->lines(yyleng); yylloc->step(); }
 
 [a-zA-Z_][a-zA-Z0-9_]*	SAVE_TOKEN; return token::TIDENTIFIER;
-[0-9]+\.[0-9]*			SAVE_TOKEN; return token::TDOUBLE;
-[0-9]+					SAVE_TOKEN; return token::TINTEGER;
+[0-9]+\.[0-9]*			SAVE_TOKEN; return token::TSCALAR;
+[0-9]+					SAVE_TOKEN; return token::TSCALAR;
 \<.+\>\n				SAVE_TOKEN;	return token::TLIST;
 [0-9]+[\+\-][0-9]+i 	SAVE_TOKEN; return token::TCOMPLEX;
 
 "="						return TOKEN(token::TEQUAL);
 ":="					return TOKEN(token::TASSIGN);
-"=="                    return TOKEN(token::TCEQ);
+"=="					return TOKEN(token::TCEQ);
 "+="					return TOKEN(token::TPEQUAL);
 "-="					return TOKEN(token::TMEQUAL);
 "/="					return TOKEN(token::TDEQUAL);
@@ -79,8 +79,8 @@
 "::"					return TOKEN(token::TSRO);
 "("						return TOKEN(token::TLPAREN);
 ")"						return TOKEN(token::TRPAREN);
-"{"                     return TOKEN(token::TLBRACE);
-"}"                     return TOKEN(token::TRBRACE);
+"{"						return TOKEN(token::TLBRACE);
+"}"						return TOKEN(token::TRBRACE);
 "."						return TOKEN(token::TDOT);
 ","						return TOKEN(token::TCOMMA);
 "+"						return TOKEN(token::TPLUS);
@@ -89,7 +89,7 @@
 "/"						return TOKEN(token::TDIV);
 "%"						return TOKEN(token::TMOD);
 "^"						return TOKEN(token::TPOW);
-"~"                     return TOKEN(token::TROOT);
+"~"						return TOKEN(token::TROOT);
 .						std::cout << "Error: Unknown Token \"" <<  yytext << "\"" << std::endl; yyterminate();
 
 %%
@@ -112,10 +112,10 @@ namespace Mt {
 
 int yyFlexLexer::yylex(void) {
 	std::cerr << "in MtFlexLexer::yylex() !" << std::endl;
-    return 0;
+	return 0;
 }
 int yyFlexLexer::yywrap() {
-    return 1;
+	return 1;
 }
 #if defined(__clang__)
 #pragma clang diagnostic pop
